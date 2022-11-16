@@ -35,5 +35,5 @@ router.get('/attendance/status-list', (req, res) => {
 app.use(router);
 
 app.listen(port, () => {
-  console.log(`⚡️ %c Server is running on port ${port}`, 'color: #00ff00');
+  console.log(`%c ⚡️ Server is running on port ${port}`, 'color: #00ff00');
 });
