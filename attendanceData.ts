@@ -1,11 +1,12 @@
 // 상태 종류
 const UserStatus = {
-  ATTENDANCE: 'ATTENDANCE', // 출석
-  ENTRANCE: 'ENTRANCE', // 입실
-  EARLY_DEPARTURE: 'EARLY_DEPARTURE', // 조퇴
-  ABSENT: 'ABSENT', // 결석
-  BEFORE_ENTRANCE: 'BEFORE_ENTRANCE', // 입실 전
-  OUTING: 'OUTING', // 외출
+  INIT: 'INIT', // 초기
+  ATTENDANCE: 'ATTENDANCE', // 출석 (I)
+  ENTRANCE: 'ENTRANCE', // 입실 (C)
+  EARLY_DEPARTURE: 'EARLY_DEPARTURE', // 조퇴 (H)
+  ABSENT: 'ABSENT', // 결석 (G)
+  ENTRANCE_W_OUTING: 'ENTRANCE_W_OUTING', // 외출 후 재입실 (E)
+  OUTING: 'OUTING', // 외출 (D)
 } as const;
 
 type TUserStatus = typeof UserStatus[keyof typeof UserStatus];
