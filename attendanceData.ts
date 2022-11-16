@@ -25,7 +25,6 @@ type TMonthData = {
 
 // results에 들어가는 데이터
 type TUserAttendanceData = {
-  row_number: number; // 순번 (정렬용인건지? @박선우)
   user_id: number; // user pk
   name: string;
   email: string;
@@ -41,10 +40,13 @@ type TUserAttendanceData = {
 
 // response data
 type ResponseAttendanceStatus = {
-  count: number;
-  next: string | null; //'다음 페이지 주소',
-  previous: string | null; //'이전 페이지 주소',
-  results: TUserAttendanceData[];
+  itemCountPerPage: number;
+  currentPageNumber: number;
+  totalPageCount: number;
+  totalItemCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+  items: TUserAttendanceData[];
 };
 
 // time stamp에 null 값을 랜덤으로 주기 위한 함수
@@ -55,10 +57,10 @@ const randomTimeStamp = (max: number) => {
 };
 
 // 월별 데이터 생성
-const userAttendanceList: TMonthData[] = Array.from(Array(3)).map(
+const userAttendanceList: TMonthData[] = Array.from(Array(2)).map(
   (_, index) => {
     return {
-      month: index + 9,
+      month: index + 11,
       day_list: Array.from(Array(31)).map((_, index) => {
         const i = Object.keys(UserStatus) as TUserStatus[];
         return {
@@ -73,11 +75,10 @@ const userAttendanceList: TMonthData[] = Array.from(Array(3)).map(
 
 // 유저별 데이터 생성
 export const userAttendanceData: TUserAttendanceData[] = Array.from(
-  Array(70)
+  Array(20) // 인원수
 ).map((_, index) => {
   const timestamp = randomTimeStamp(2);
   return {
-    row_number: index + 1,
     user_id: index + 1,
     name: `${index + 1}석현`,
     email: `i-am-number-${index + 1}@email.com`,
@@ -97,8 +98,11 @@ export const userAttendanceData: TUserAttendanceData[] = Array.from(
 
 // 최종 데이터 생성
 export const attendanceData: ResponseAttendanceStatus = {
-  count: 30,
-  next: null,
-  previous: null,
-  results: userAttendanceData,
+  itemCountPerPage: 10,
+  currentPageNumber: 1,
+  totalPageCount: 2,
+  totalItemCount: 20,
+  hasPreviousPage: false,
+  hasNextPage: true,
+  items: userAttendanceData,
 };

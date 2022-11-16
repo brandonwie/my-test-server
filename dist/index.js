@@ -5,9 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
 const attendanceData_1 = require("./attendanceData");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 const port = process.env.PORT;
 const router = express_1.default.Router();
 // app.get('/', (req, res) => {
@@ -24,6 +26,7 @@ router.use((req, res, next) => {
     next();
 });
 router.get('/attendance/status-list', (req, res) => {
+    console.log(req.body);
     res.send(attendanceData_1.attendanceData);
     res.sendStatus(200);
 });

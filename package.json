@@ -6,6 +6,8 @@
   "author": "Brandon Wie",
   "license": "MIT",
   "dependencies": {
+    "@types/cors": "^2.8.12",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },

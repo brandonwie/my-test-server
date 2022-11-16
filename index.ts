@@ -1,11 +1,13 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import { attendanceData } from './attendanceData';
 
 dotenv.config();
 
 const app: Express = express();
+app.use(cors());
 const port = process.env.PORT;
 const router = express.Router();
 
@@ -25,6 +27,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/attendance/status-list', (req, res) => {
+  console.log(req.body);
   res.send(attendanceData);
   res.sendStatus(200);
 });

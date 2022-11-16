@@ -17,9 +17,9 @@ const randomTimeStamp = (max) => {
     return arr[index];
 };
 // 월별 데이터 생성
-const userAttendanceList = Array.from(Array(3)).map((_, index) => {
+const userAttendanceList = Array.from(Array(2)).map((_, index) => {
     return {
-        month: index + 9,
+        month: index + 11,
         day_list: Array.from(Array(31)).map((_, index) => {
             const i = Object.keys(UserStatus);
             return {
@@ -31,10 +31,10 @@ const userAttendanceList = Array.from(Array(3)).map((_, index) => {
     };
 });
 // 유저별 데이터 생성
-exports.userAttendanceData = Array.from(Array(70)).map((_, index) => {
+exports.userAttendanceData = Array.from(Array(20) // 인원수
+).map((_, index) => {
     const timestamp = randomTimeStamp(2);
     return {
-        row_number: index + 1,
         user_id: index + 1,
         name: `${index + 1}석현`,
         email: `i-am-number-${index + 1}@email.com`,
@@ -53,8 +53,11 @@ exports.userAttendanceData = Array.from(Array(70)).map((_, index) => {
 });
 // 최종 데이터 생성
 exports.attendanceData = {
-    count: 30,
-    next: null,
-    previous: null,
-    results: exports.userAttendanceData,
+    itemCountPerPage: 10,
+    currentPageNumber: 1,
+    totalPageCount: 2,
+    totalItemCount: 20,
+    hasPreviousPage: false,
+    hasNextPage: true,
+    items: exports.userAttendanceData,
 };
